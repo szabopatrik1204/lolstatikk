@@ -1,6 +1,7 @@
 package com.patrik.lolstatikk.mapper;
 
-import com.patrik.lolstatikk.dto.ChampionDto;
+import com.patrik.lolstatikk.dto.ChampionRequestDto;
+import com.patrik.lolstatikk.dto.ChampionTableDto;
 import com.patrik.lolstatikk.entity.ChampionEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,7 +11,8 @@ import java.util.List;
 @Mapper
 public interface ChampionMapper {
 
-
+    @Mapping(target = "id", ignore = true)
+    @Mapping(source = "id", target = "championId")
     @Mapping(source = "stats.hp", target = "hp")
     @Mapping(source = "stats.hpPerLevel", target = "hpPerLevel")
     @Mapping(source = "stats.mp", target = "mp")
@@ -31,10 +33,12 @@ public interface ChampionMapper {
     @Mapping(source = "stats.attackDamagePerLevel", target = "attackDamagePerLevel")
     @Mapping(source = "stats.attackSpeedPerLevel", target = "attackSpeedPerLevel")
     @Mapping(source = "stats.attackSpeed", target = "attackSpeed")
-    public ChampionEntity dtoToEntity(ChampionDto dto);
-    
+    public ChampionEntity dtoToEntity(ChampionRequestDto dto);
 
+    public List<ChampionEntity> dtosToEntities(List<ChampionRequestDto> dto);
 
-    public List<ChampionEntity> dtosToEntities(List<ChampionDto> dto);
+    ChampionTableDto entityToTableDto(ChampionEntity entity);
+
+    List<ChampionTableDto> entitiesToTableDtos(List<ChampionEntity> entities);
 
 }

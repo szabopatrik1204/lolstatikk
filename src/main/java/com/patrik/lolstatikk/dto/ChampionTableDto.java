@@ -1,33 +1,19 @@
-package com.patrik.lolstatikk.entity;
+package com.patrik.lolstatikk.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.io.Serializable;
+import java.util.List;
 
 @Data
-@Entity
-@Table(name = "champion")
-public class ChampionEntity implements Serializable {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    private String championId;
-
-    private String version;
-
-    private String key;
+public class ChampionTableDto {
 
     private String name;
 
     private String title;
 
     private String parType;
+
+    private List<String> tags;
 
     private float hp;
 
@@ -69,5 +55,5 @@ public class ChampionEntity implements Serializable {
 
     private float attackSpeed;
 
-}
 
+}

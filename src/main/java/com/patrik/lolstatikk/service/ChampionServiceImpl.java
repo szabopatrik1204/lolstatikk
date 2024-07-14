@@ -3,14 +3,14 @@ package com.patrik.lolstatikk.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.patrik.lolstatikk.dto.ChampionDto;
+import com.patrik.lolstatikk.dto.ChampionRequestDto;
+import com.patrik.lolstatikk.dto.ChampionTableDto;
 import com.patrik.lolstatikk.mapper.ChampionMapper;
 import com.patrik.lolstatikk.repository.ChampionRepository;
 import lombok.extern.log4j.Log4j2;
-import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONObject;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -23,11 +23,14 @@ public class ChampionServiceImpl implements ChampionService {
 
     private static final ChampionMapper CHAMPION_MAPPER = Mappers.getMapper(ChampionMapper.class);
 
-    @Autowired
-    ChampionRepository championRepository;
+    public ChampionServiceImpl(ChampionRepository championRepository, DDragonRiotApiService dDragonRiotApiService) {
+        this.championRepository = championRepository;
+        this.dDragonRiotApiService = dDragonRiotApiService;
+    }
 
-    @Autowired
-    DDragonRiotApiService dDragonRiotApiService;
+    private final ChampionRepository championRepository;
+
+    private final DDragonRiotApiService dDragonRiotApiService;
 
     @Override
     public String saveChampions(String version) throws IOException {
@@ -37,7 +40,7 @@ public class ChampionServiceImpl implements ChampionService {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(resultJson);
-        List<ChampionDto> championList = new ArrayList<>();
+        List<ChampionRequestDto> championList = new ArrayList<>();
         for (String key : dataJson.keySet()) {
             championList.add(objectMapper.readValue(jsonNode.get("data").get(key).toPrettyString(), new TypeReference<>() {
             }));
@@ -46,4 +49,18 @@ public class ChampionServiceImpl implements ChampionService {
 
         return "";
     }
+
+    @Override
+    public List<ChampionTableDto> findAllChampions(String version) {
+        return CHAMPION_MAPPER.entitiesToTableDtos(championRepository.findAllByVersion(version));
+    }
+
+    @Override
+    public List<ChampionTableDto> findAllSorted(String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+        return CHAMPION_MAPPER.entitiesToTableDtos(championRepository.findAll(sort));
+    }
+
+
 }

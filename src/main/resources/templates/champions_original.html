@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+</head>
+<body>
+<h1>Champions List</h1>
+
+<form action="#" th:action="@{/getChampionsTable}" method="get">
+    <label for="filterName">Filter by Name:</label>
+    <input type="text" id="filterName" name="filterName" th:value="${param.filterName}" />
+    <button type="submit">Filter</button>
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Tags</th>
+        <th>Resource</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="champion : ${champions}">
+        <td th:text="${champion.name}">Name</td>
+        <td th:text="${champion.title}">Title</td>
+        <td th:text="${#strings.listJoin(champion.tags,',')}">Tags</td>
+        <td th:text="${champion.parType}">resource</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

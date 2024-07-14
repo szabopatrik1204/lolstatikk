@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Champions</title>
+    <script src="/js/champions.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/css/champions_table.css">
+</head>
+<body>
+<div>
+    <button onclick="fetchChampions('name', 'asc')">Fetch Champions</button>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+            <tr>
+                <th><a href="#" onclick="fetchChampions('name', 'asc')">Name</a></th>
+                <th><a href="#" onclick="fetchChampions('title', 'asc')">Title</a></th>
+                <th><a href="#" onclick="fetchChampions('parType', 'asc')">Par Type</a></th>
+                <th><a href="#" onclick="fetchChampions('tags', 'asc')">Tags</a></th>
+                <th><a href="#" onclick="fetchChampions('hp', 'asc')">HP</a></th>
+                <th><a href="#" onclick="fetchChampions('hpPerLevel', 'asc')">HP per Level</a></th>
+                <th><a href="#" onclick="fetchChampions('mp', 'asc')">MP</a></th>
+                <th><a href="#" onclick="fetchChampions('mpPerLevel', 'asc')">MP per Level</a></th>
+                <th><a href="#" onclick="fetchChampions('moveSpeed', 'asc')">Move Speed</a></th>
+                <th><a href="#" onclick="fetchChampions('armor', 'asc')">Armor</a></th>
+                <th><a href="#" onclick="fetchChampions('armorPerLevel', 'asc')">Armor per Level</a></th>
+                <th><a href="#" onclick="fetchChampions('magicResist', 'asc')">Magic Resist</a></th>
+                <th><a href="#" onclick="fetchChampions('magicResistPerLevel', 'asc')">Magic Resist per Level</a></th>
+                <th><a href="#" onclick="fetchChampions('attackRange', 'asc')">Attack Range</a></th>
+                <th><a href="#" onclick="fetchChampions('hpRegen', 'asc')">HP Regen</a></th>
+                <th><a href="#" onclick="fetchChampions('hpRegenPerLevel', 'asc')">HP Regen per Level</a></th>
+                <th><a href="#" onclick="fetchChampions('mpRegen', 'asc')">MP Regen</a></th>
+                <th><a href="#" onclick="fetchChampions('mpRegenPerLevel', 'asc')">MP Regen per Level</a></th>
+                <th><a href="#" onclick="fetchChampions('crit', 'asc')">Crit</a></th>
+                <th><a href="#" onclick="fetchChampions('critPerLevel', 'asc')">Crit per Level</a></th>
+                <th><a href="#" onclick="fetchChampions('attackDamage', 'asc')">Attack Damage</a></th>
+                <th><a href="#" onclick="fetchChampions('attackDamagePerLevel', 'asc')">Attack Damage per Level</a></th>
+                <th><a href="#" onclick="fetchChampions('attackSpeedPerLevel', 'asc')">Attack Speed per Level</a></th>
+                <th><a href="#" onclick="fetchChampions('attackSpeed', 'asc')">Attack Speed</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Content will be updated via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
